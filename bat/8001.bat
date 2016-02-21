@@ -1,0 +1,1 @@
+"L:\Program Files\vlc-2.0.3\vlc" http://192.168.0.1:8001
