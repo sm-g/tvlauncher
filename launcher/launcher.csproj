@@ -40,10 +40,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DZ.MediaPlayer.Vlc">
-      <HintPath>..\..\..\Samples\libvlcnet-0.4.0.0-src\trunk\media-player-vlc-winforms\bin\Debug\DZ.MediaPlayer.Vlc.dll</HintPath>
+      <HintPath>lib\DZ.MediaPlayer.Vlc.dll</HintPath>
     </Reference>
     <Reference Include="DZ.MediaPlayer.Vlc.WindowsForms">
-      <HintPath>..\..\..\Samples\libvlcnet-0.4.0.0-src\trunk\media-player-vlc-winforms\bin\Debug\DZ.MediaPlayer.Vlc.WindowsForms.dll</HintPath>
+      <HintPath>lib\DZ.MediaPlayer.Vlc.WindowsForms.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -99,6 +99,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="lib\libvlc-1.1.9-win32.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -141,14 +144,24 @@
     <None Include="Resources\speaker-volume-none.png" />
     <None Include="Resources\speaker-volume-control-mute.png" />
     <None Include="Resources\speaker-volume.png" />
+    <Content Include="lib\Common.Logging.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\DZ.MediaPlayer.Vlc.dll" />
+    <Content Include="lib\DZ.MediaPlayer.Vlc.pdb" />
+    <Content Include="lib\DZ.MediaPlayer.Vlc.WindowsForms.dll" />
+    <Content Include="lib\DZ.MediaPlayer.Vlc.WindowsForms.pdb" />
+    <Content Include="lib\ICSharpCode.SharpZipLib.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="tv.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
   <Target Name="AfterBuild">
+    <ItemGroup>
+      <MoveFromLibFolder Include="$(OutputPath)lib\*.*" />
+    </ItemGroup>
+    <Move SourceFiles="@(MoveFromLibFolder)" DestinationFolder="$(OutputPath)" OverwriteReadOnlyFiles="true" />
+    <RemoveDir Directories="$(OutputPath)lib" />
   </Target>
-  -->
 </Project>
